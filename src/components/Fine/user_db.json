@@ -1,0 +1,41 @@
+[
+    {
+        "vehicleNumber": "AA11AA1111",
+        "name": "Sunil Kumar Maurya",
+        "phone": "+91 1111111111",
+        "address": "Biet jhansi",
+        "isMissing": "false",
+        "model": "Verna Sportz"
+    },
+    {
+        "vehicleNumber": "BB22BB2222",
+        "name": "Badal Tyagi",
+        "phone": "+91 1111111111",
+        "address": "Biet jhansi",
+        "isMissing": "false",
+        "model": "Verna Sportz"
+    },
+    {
+        "vehicleNumber": "CC33CC3333",
+        "name": "Bhanu Singh",
+        "phone": "+91 1111111111",
+        "address": "Biet jhansi",
+        "isMissing": "false",
+        "model": "Verna Sportz"
+    },
+    {
+        "vehicleNumber": "DD44DD4444",
+        "name": "Aman Chaudhary",
+        "phone": "+91 1111111111",
+        "address": "Biet jhansi",
+        "isMissing": "false",
+        "model": "Verna Sportz"
+    },{
+        "vehicleNumber": "HR26DK8337",
+        "name": "Dr. R.N Verma",
+        "phone": "+91 1111111111",
+        "address": "Biet jhansi",
+        "isMissing": "false",
+        "model": "B M W"
+    }
+]

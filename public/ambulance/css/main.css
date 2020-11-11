@@ -1,0 +1,111 @@
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+.below-mouse {
+	display: none;
+	font-size: 10pt;
+	font-weight: bold;
+	position: absolute;
+	z-index: 1;
+}
+.marker {
+	background-color: #000000;
+	border: 1px solid #181818;
+	border-radius: 50%;
+	box-shadow: 0px 5px 5px #6d6d6d;
+	color: #ffffff;
+	display: none;
+	font-size: 11pt;
+	font-weight: bold;
+	height: 25px;
+	line-height: 25px;
+	pointer-events: none;
+	position: absolute;
+	text-align: center;
+	width: 25px;
+	z-index: 1;
+}
+.mapbox-container {
+	height: 100%;
+}
+#map {
+	height: 100%;
+	width: 100%;
+}
+.user-options-box {
+	background-color: #ffffff;
+	border-radius: 4px;
+	box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.1);
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	height: 136px;
+	left: 10px;
+	overflow: hidden;
+	position: absolute;
+	top: 10px;
+	transition: height 0.5s ease;
+	-moz-transition: height 0.5s ease;
+	-o-transition: height 0.5s ease;
+	-webkit-transition: height 0.5s ease;
+	width: 200px;
+	z-index: 2;
+}
+.user-options-box p {
+	font-size: 10pt;
+	font-style: italic;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+.user-options-box-title {
+	font-weight: bold;
+	padding-bottom: 5px;
+	padding-top: 10px;
+	text-align: center;
+}
+.user-options-box-set-button {
+	background-color: #6c6b6b;
+	border: 1px solid #181818;
+	border-radius: 3px;
+	color: #ffffff;
+	cursor: pointer;
+	font-size: 10pt;
+	margin: 8px auto;
+	padding: 6px 10px;
+	text-align: center;
+	width: 80%;
+}
+.user-options-box-set-button:hover {
+	background-color: #181818;
+}
+.user-options-box-button {
+	background-color: #2bbe20;
+	border-radius: 3px;
+	color: #ffffff;
+	cursor: pointer;
+	display: none;
+	font-size: 12pt;
+	font-weight: bold;
+	margin: 8px auto;
+	padding: 10px 10px;
+	text-align: center;
+	width: 80%;
+}
+.user-options-box-calc-route-button:hover {
+	background-color: #17830f;
+}
+.user-options-box-simulate {
+	display: none;
+	height: 92px;
+}
+.user-options-box-simulate form input {
+	border: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	outline: none;
+	margin: 8px 10%;
+	padding: 2px;
+	text-align: center;
+	width: 80%;
+}

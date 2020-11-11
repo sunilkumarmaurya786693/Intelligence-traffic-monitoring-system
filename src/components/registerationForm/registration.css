@@ -1,0 +1,70 @@
+
+.testbox {
+    margin: 0 auto;
+    width: 425px;
+    height: 500px;
+    border-radius: 8px;
+    background-color: #ebebeb;
+    -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.31);
+    box-shadow: 1px 2px 5px rgba(0,0,0,.31);
+    border: solid 1px #cbc9c9;
+    position: relative;
+    top: 10vh;
+}
+.heading{
+    text-align: center;
+    margin-top: 10px !important;
+}
+.inputRow{
+    height: 39px;
+    width: 425px;
+    margin: 10px;
+}
+.inputRow input{
+    height: 39px;
+    width: 350px;
+    border-radius: 0 10px 10px 0;
+    padding-left: 10px;
+    border: none; 
+    border-width: 0; 
+    box-shadow: none;
+}
+
+hr{
+  color: #a9a9a9;
+  opacity: 0.3;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+.button1{
+    background-color: #50A550;
+    color: white;
+    border:0;outline:0;
+       height: 39px;
+       width: 350px;
+    border-radius: 10px;
+    margin: 10px;
+    margin-left: 36px;
+padding-left: 10px;
+-webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.31);
+    box-shadow: 1px 2px 5px rgba(0,0,0,.31);
+}
+.button1:hover{
+    background-color: #89d489;
+    color: white;
+    cursor: pointer;
+}
+input {border:0;outline:0;
+       height: 39px;
+       width: 350px;
+    border-radius: 10px;
+    margin: 10px;
+    margin-left: 36px;
+padding-left: 10px;
+-webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.31);
+    box-shadow: 1px 2px 5px rgba(0,0,0,.31);
+}
+input:focus {outline:none!important;}

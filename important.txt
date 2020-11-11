@@ -1,0 +1,6 @@
+
+ /usr/bin/python3 "/home/sunil/Desktop/Final year project (sunil,Bhanu,Badal,Aman))/vehicle_number_by_its_plate/image_example.py"
+
+
+ ./ngrok http 3000 -host-header="localhost:3000"
+

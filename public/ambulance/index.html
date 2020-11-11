@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="https://api.mapbox.com/mapbox-gl-js/v0.35.0/mapbox-gl.css">
+		<script src="js/main.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://api.mapbox.com/mapbox-gl-js/v0.35.0/mapbox-gl.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwoSD3UICvG_YxjQ80U4eenRPS9dvhpJU"></script>
+	</head>
+	<body>
+		<div class="user-options-box">
+			<div class="user-options-box-title"></div>
+			<p></p>
+			<div class="user-options-box-set-button" id="origin-btn" onclick="javascript:originSelect(); removeMostRecentRoute(); removeMostRecentPoint();">Tap to set an origin</div>
+			<div class="user-options-box-set-button" id="destination-btn" onclick="javascript:destinationSelect(); removeMostRecentRoute(); removeMostRecentPoint();">Tap to set a destination</div>
+			<div class="user-options-box-button" id="calc-route-btn" onclick="javascript:calcRoute(); removeMostRecentPoint();">Go!</div>
+			<div class="user-options-box-simulate" id="simulate-container">
+				<p>Set an average speed:</p>
+				<form action="javascript:simulateRoute();">
+					<input type="number" name="simulationSpeed" placeholder="Km/h" />
+					<input type="submit" style="position: absolute; left: -9999px"/>
+				</form>
+				<div class="user-options-box-button" id="simulate-btn" onclick="javascript:simulateRoute();">Simulate!</div>
+			</div>
+		</div>
+		<div class="mapbox-container">
+			<div id="map" display="none"></div>
+		</div>
+		<div class="marker" id="destination-marker"></div>
+		<div class="marker" id="origin-marker"></div>
+		<div class="below-mouse"></div>
+		<style type="text/css">
+			.marker-custom {
+ 	 background-image: url('red.jpg');
+	 background-repeat: no-repeat;
+	 background-size: 'contain';
+      position:absolute;
+      z-index:1;
+      display:block;
+      border-radius:0%;
+      height:85px;
+      width: 30px;
+}
+			.marker-green {
+  		background-image: url('green.jpg');
+      position:absolute;
+      z-index:1;
+      display:block;
+      border-radius:0%;
+      height:85px;
+      width: 30px;
+}
+		</style>
+		<script>
+			var singaporeBounds = [[103.613434, 1.215486], [104.087219, 1.474966]];
+			var singaporeCenter = [30.694209, 76.607873]
+			mapboxgl.accessToken = "pk.eyJ1IjoiYWxlY2tyZXRjaCIsImEiOiJjajFmNGNkcTkwMGEwMndwM2FjNHY2cHJkIn0.t0Qakhusiu9vM3RADzORxA";
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v9',
+ 	center: [76.779418, 30.733315],
+    zoom: 14
+});
+		// 	var map = new mapboxgl.Map({
+		// 		container: "map",
+		// 		style: "mapbox://styles/mapbox/streets-v9",
+		// 		center: [76.7794, 30.741482],
+		// 		// minZoom: 15
+		// 	});
+			map.addControl(new mapboxgl.NavigationControl());
+			map.on('click', function(e) {
+				placeMarker(e);
+
+			});
+
+
+
+		// new mapboxgl.Marker(
+		// .setLngLat([30.694209, 76.607873])
+		// .addTo(map);
+
+
+			var directionsDisplay;
+			var directionsService = new google.maps.DirectionsService();
+		var geojson = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "message": "Foo",
+                "iconSize": [60, 60]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                  76.774521, 30.739545
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "message": "Bar",
+                "iconSize": [50, 50]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                	76.763020, 30.732684
+                ]
+            }
+        },
+
+    ]
+};
+
+function distance(lat1, lon1, lat2, lon2, unit) {
+	// console.log(lat1, lon1, lat2, lon2)
+	var radlat1 = Math.PI * lat1/180
+	var radlat2 = Math.PI * lat2/180
+	var theta = lon1-lon2
+	var radtheta = Math.PI * theta/180
+	var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+	dist = Math.acos(dist)
+	dist = dist * 180/Math.PI
+	dist = dist * 60 * 1.1515
+	if (unit=="K") { dist = dist * 1.609344 }
+	if (unit=="N") { dist = dist * 0.8684 }
+	return dist
+}
+    var el = document.createElement('div');
+    el.className = 'marker-custom';
+		el.style.backgroundImage = 'url(red.jpg)';
+		el.style.backgroundRepeat = 'no-repeat';
+    el.style.backgroundSize = 'contain';
+
+    el.addEventListener('click', function() {
+        window.alert(marker.properties.message);
+    });
+
+
+
+    var ell = document.createElement('div');
+    ell.className = 'marker-green';
+    ell.style.backgroundImage = 'url(red.jpg) ';
+		ell.style.backgroundRepeat = 'no-repeat';
+		ell.style.backgroundSize = 'contain';
+
+    ell.addEventListener('click', function() {
+        window.alert(marker.properties.message);
+    });
+
+
+  setInterval(function(){
+ var coords  = getCoord();
+ var longMov = coords[0];
+ var latMov = coords[1];
+
+ var pheliLight = geojson.features[0].geometry.coordinates;
+  var doosriLight = geojson.features[1].geometry.coordinates;
+
+ // console.log(pheliLight)
+if(longMov){
+	console.log(distance(latMov,longMov,pheliLight[1],pheliLight[0]))
+	if(distance(latMov,longMov,pheliLight[1],pheliLight[0])<0.3){
+		    el.style.backgroundImage = 'url(green.jpg)';
+	}
+	if(distance(latMov,longMov,pheliLight[1],pheliLight[0])>0.3){
+		    el.style.backgroundImage = 'url(red.jpg)';
+	}
+	if(distance(latMov,longMov,doosriLight[1],doosriLight[0])<0.3){
+		    ell.style.backgroundImage = 'url(green.jpg)';
+	}
+	if(distance(latMov,longMov,doosriLight[1],doosriLight[0])>0.3){
+		    ell.style.backgroundImage = 'url(red.jpg)';
+	}
+
+
+
+}
+    // console.log(lat[0]);
+  }, 1000);
+function batti(){
+	// var lat  = getCoord();
+ //    console.log(lat[0]);
+}
+// add markers to map''
+
+for(var i = 0;i<geojson.features.length;i++) {
+    // create a DOM element for the marker
+    // add marker to map
+    if(i==0){
+    new mapboxgl.Marker(el)
+        .setLngLat(geojson.features[i].geometry.coordinates)
+        .addTo(map);
+    }
+    else if(i==1){
+		new mapboxgl.Marker(ell)
+        .setLngLat(geojson.features[i].geometry.coordinates)
+        .addTo(map);
+    }
+}
+		</script>
+	</body>
+</html>

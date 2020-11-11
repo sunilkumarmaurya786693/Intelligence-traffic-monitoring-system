@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Line Chart Test</title>
+  <style>
+  .body{
+    margin: 0;
+    height: 100%;
+  }
+  .box{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+  h1 {
+    font-weight: 100;
+  }
+  canvas {
+    width: 90%;
+    height: 100%;
+  }
+  select {
+    position: absolute;
+    right: 50px;
+    top: 30px;
+    width: 200px;
+    height: 30px;
+    background: white;
+    border: '1px solid #efefef';
+    font-size: 18px;
+  }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+  <script language="JavaScript">
+  function displayLineChart() {
+    var data = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug'],
+        datasets: [
+            {
+                label: "Traffic Density",
+                fillColor: "#D4EAEA",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [56, 60, 75, 77, 64, 45, 68, 70]
+            },
+        ]
+    };
+    var ctx = document.getElementById("lineChart").getContext("2d");
+    var options = { };
+    var lineChart = new Chart(ctx).Line(data, options);
+  }
+  function trafficSelection(){
+    var selectBox = document.getElementById("selectBox");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    console.log('this is selected area',selectedValue);
+
+    var data = {
+      1:{
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug'],
+        datasets: [
+            {
+                label: "Traffic Density",
+                fillColor: "#D4EAEA",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [56, 60, 75, 77, 64, 45, 68, 70]
+            },
+        ]
+    },
+      2:{
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug'],
+        datasets: [
+            {
+                label: "Traffic Density",
+                fillColor: "#D4EAEA",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [36, 20, 75, 77, 64, 45, 18, 70]
+            },
+        ]
+        },
+        3:{
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug'],
+        datasets: [
+            {
+                label: "Traffic Density",
+                fillColor: "#D4EAEA",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [90, 60, 75, 17, 64, 45, 48, 50]
+            },
+        ]
+    },
+      4:{
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug'],
+        datasets: [
+            {
+                label: "Traffic Density",
+                fillColor: "#D4EAEA",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [36, 20, 45, 77, 64, 75, 18, 20]
+            },
+        ]
+        },
+      5: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug'],
+        datasets: [
+            {
+                label: "Traffic Density",
+                fillColor: "#D4EAEA",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [56, 10, 45, 17, 64, 25, 88, 10]
+            },
+        ]
+    }
+    };
+    var ctx = document.getElementById("lineChart").getContext("2d");
+    var options = { };
+    var lineChart = new Chart(ctx).Line(data[selectedValue], options);
+    
+  }
+  </script>
+</head>
+<body onload="displayLineChart();">
+  <div class="box">
+    <h1> Traffic Density </h1>
+    <select id="selectBox" onchange="trafficSelection()">
+      <option value="1">Jhansi Railways</option>
+      <option value="2">Kanpur Jhansi Highway NH27</option>
+      <option value="3">Elite choraha</option>
+      <option value="4">Biet Main Road</option>
+      <option value="5">Jawalior road</option>
+    </select>
+    <canvas id="lineChart"></canvas>
+  </div>
+</body>
+</html>
